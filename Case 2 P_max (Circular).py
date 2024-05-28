@@ -15,8 +15,8 @@ def Fatigue_Circular(L, P,gamma, beta, v_w, n=100):
 def Beta(mu, M, G, phi):
     return M*G*(np.sin(phi)+mu*np.cos(phi))
 
-Phis = np.linspace(0, np.pi/22, 1000)
-Ps = np.linspace(600, 1600, 1000)
+Phis = np.linspace(0, np.pi/22, 2000) # Change to 18 for the solution curve
+Ps = np.linspace(600, 1600, 2000)
 
 l, gamm, V_w, omega, Mu, m, g = 45000, 0.2, 10/3.6, np.pi/6, 0.0032, 75, 9.81
 
@@ -45,7 +45,7 @@ ax.plot_surface(P_Phi_P, 180/np.pi*P_Phi_Phi, T_highlight/3600, color='red', alp
 ax.set_xlabel('Max Power (W)', fontsize=12)
 ax.set_ylabel('Angle of Elevation (deg)', fontsize=12)
 ax.set_zlabel('Time (Hours)', fontsize=12)
-ax.set_title('Time as a Function of P_max', fontsize=20)
+ax.set_title('Time as a Function of P_max (Circular)', fontsize=20)
 #fig.savefig("Time vs P_max (Circular).png")
  
 plt.show()
@@ -62,7 +62,7 @@ ax.plot_surface(P_Phi_P, 180/np.pi*P_Phi_Phi, F_highlight, color='red', alpha=0.
 ax.set_xlabel('Max Power (W)', fontsize=12)
 ax.set_ylabel('Angle of Elevation (deg)', fontsize=12)
 ax.set_zlabel('Energy Expenditure (cal)', fontsize=12)
-ax.set_title('Fatigue as a Function of P_max', fontsize=20)
+ax.set_title('Fatigue as a Function of P_max (Circular)', fontsize=20)
 #fig.savefig("Fatigue vs P_max (Circular).png")
 plt.show()
 
@@ -70,9 +70,9 @@ plt.show()
 Here for Case 3
 '''
 
-Epsilon = 1e0
+Epsilon = 2e0
 
-F_highlight = np.where(np.abs(F_Circular-2000)<=Epsilon, np.zeros((1000,1000)),255* np.ones((1000,1000)))  # Use np.nan to not plot points below 1000
+F_highlight = np.where(np.abs(F_Circular-2000)<=Epsilon, np.zeros((2000,2000)),255* np.ones((2000,2000)))  # Use np.nan to not plot points below 1000
 im = Image.fromarray(F_highlight)
 im.show()
 
