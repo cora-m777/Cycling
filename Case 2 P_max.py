@@ -12,8 +12,8 @@ def Fatigue_Linear(L, P,gamma, beta, v_w, Omega):
 def Beta(mu, M, G, phi):
     return M*G*(np.sin(phi)+mu*np.cos(phi))
 
-Phis = np.linspace(0, np.pi/30, 1000)
-Ps = np.linspace(300, 1200, 1000)
+Phis = np.linspace(0, np.pi/18, 1000)
+Ps = np.linspace(600, 1600, 1000)
 
 l, gamm, V_w, omega, Mu, m, g = 45000, 0.2, 10/3.6, np.pi/6, 0.0032, 75, 9.81
 
@@ -29,8 +29,8 @@ T_linear = Time_Linear(l, P_Phi_P, gamm, Beta(Mu, m, g, P_Phi_Phi), V_w, omega)
 F_linear = Fatigue_Linear(l, P_Phi_P, gamm, Beta(Mu, m, g, P_Phi_Phi), V_w, omega)
 F_linear = F_linear
 
-T_highlight = np.where(F_linear >= 1000.0, T_linear, np.nan)  # Use np.nan to not plot points below 1000
-F_highlight = np.where(F_linear >= 1000.0, F_linear, np.nan)  # Use np.nan to not plot points below 1000
+T_highlight = np.where(F_linear >= 2000.0, T_linear, np.nan)  # Use np.nan to not plot points below 1000
+F_highlight = np.where(F_linear >= 2000.0, F_linear, np.nan)  # Use np.nan to not plot points below 1000
 
 fig = plt.figure(figsize=(10, 10))
 ax = plt.axes(projection='3d')
@@ -69,7 +69,7 @@ Here for Case 3
 
 Epsilon = 1e0
 
-F_highlight = np.where(np.abs(F_linear-1000)<=Epsilon, np.zeros((1000,1000)),255* np.ones((1000,1000)))  # Use np.nan to not plot points below 1000
+F_highlight = np.where(np.abs(F_linear-2000)<=Epsilon, np.zeros((1000,1000)),255* np.ones((1000,1000)))  # Use np.nan to not plot points below 1000
 im = Image.fromarray(F_highlight)
 im.show()
 
